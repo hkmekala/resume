@@ -1,0 +1,31 @@
+\usepackage[default,semibold]{raleway}
+\usepackage[margin=0.5in,a4paper]{geometry}
+\setcounter{secnumdepth}{0}
+\usepackage{enumitem}
+\setlist[itemize]{nosep,left=0pt..1.5em}
+\setlist[enumerate]{itemsep=0pt,align=left}
+\setlist[description]{itemsep=0pt}
+
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\titlespacing{\section}{0pt}{*2}{*0}
+\titlespacing{\subsection}{0pt}{*1}{-\parskip}
+\titlespacing{\subsubsection}{1pt}{\parskip}{-\parskip}
+\titleformat*{\section}{\color{gray}\huge\fontseries{el}\uppercase}
+\titleformat*{\subsection}{\large\bfseries}
+\titleformat*{\subsubsection}{\bfseries\scshape}
+
+\newcommand{\aux}[1]{%
+  $|$ {\normalfont \textsc{#1}}
+}
+\newcommand{\rside}[1]{
+  \hfill {\normalfont \color{black} \scshape\oldstylenums{\lowercase{#1}}}
+}
+
+\hypersetup{
+    colorlinks=true,
+    urlcolor=blue,
+}
+
+\pagenumbering{gobble}
