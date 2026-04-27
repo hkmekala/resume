@@ -1,27 +1,59 @@
-\usepackage[default,semibold]{raleway}
-\usepackage[margin=0.5in,a4paper]{geometry}
+% Source Sans Pro: Adobe's open-source sans-serif designed for screen + print.
+% Picked over Raleway for stronger ATS compatibility (standard T1 encoding,
+% widely available, parsed cleanly by Workday / Greenhouse / Lever / Taleo)
+% while staying clean and modern for human reviewers.
+\usepackage[default,semibold,scale=0.95]{sourcesanspro}
+\usepackage[T1]{fontenc}
+
+\usepackage[margin=0.6in,a4paper]{geometry}
 \setcounter{secnumdepth}{0}
+
 \usepackage{enumitem}
-\setlist[itemize]{nosep,left=0pt..1em, itemsep=0.3em}
-\setlist[enumerate]{itemsep=0pt,align=left}
+\setlist[itemize]{nosep, leftmargin=*, itemsep=0.3em}
+\setlist[enumerate]{itemsep=0pt, align=left}
 \setlist[description]{itemsep=0pt}
 
 \usepackage{hyperref}
 \usepackage{xcolor}
+\usepackage{etoolbox}
 \usepackage{titlesec}
+
 \titlespacing{\section}{0pt}{*1}{*0}
 \titlespacing{\subsection}{0pt}{*1}{-\parskip}
 \titlespacing{\subsubsection}{1pt}{\parskip}{-\parskip}
-\titleformat*{\section}{\color{gray}\huge\fontseries{el}\uppercase}
+% Section: dark gray + bold + uppercase. Bolder than the old extra-light gray
+% style, giving clearer ATS section anchors while staying visually clean.
+\titleformat*{\section}{\color{black!70}\Large\bfseries\uppercase}
 \titleformat*{\subsection}{\large\bfseries}
 \titleformat*{\subsubsection}{\bfseries\scshape}
 
 \newcommand{\aux}[1]{%
-  $|$ {\normalfont \textsc{#1}}
+  $|$ {\normalfont \textsc{#1}}%
 }
-\newcommand{\rside}[1]{
-  \hfill {\normalfont \color{black} \scshape\oldstylenums{\lowercase{#1}}}
+\newcommand{\rside}[1]{%
+  \hfill {\normalfont \color{black} \scshape\oldstylenums{\lowercase{#1}}}%
 }
+
+% --- Variant control --------------------------------------------------
+% \resumevariant must be defined in the entry-point file (main_full.tex
+% or main_min.tex) BEFORE this style file is included. Falls back to
+% "full" if not set, so a stray \input{style.tex} doesn't break.
+\providecommand{\resumevariant}{full}
+
+% Bullet macros: emit an \item only if the current variant is in the tag set.
+%   \bb{...}  -> both variants
+%   \fb{...}  -> full variant only
+%   \mb{...}  -> min variant only
+\newcommand{\bb}[1]{\item #1}
+\newcommand{\fb}[1]{\ifdefstring{\resumevariant}{full}{\item #1}{}}
+\newcommand{\mb}[1]{\ifdefstring{\resumevariant}{min}{\item #1}{}}
+
+% Block-level conditionals for whole subsections / paragraphs / sentences.
+%   \fonly{...}  -> render only in full
+%   \monly{...}  -> render only in min
+\newcommand{\fonly}[1]{\ifdefstring{\resumevariant}{full}{#1}{}}
+\newcommand{\monly}[1]{\ifdefstring{\resumevariant}{min}{#1}{}}
+% ---------------------------------------------------------------------
 
 \hypersetup{
     colorlinks=true,

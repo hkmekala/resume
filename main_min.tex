@@ -1,0 +1,20 @@
+\documentclass[11pt]{article}
+
+% Variant: min -> single-page, distilled bullets only.
+% Must be defined BEFORE \input{style.tex} so the \bb / \fb / \mb macros
+% can resolve correctly.
+\def\resumevariant{min}
+
+\input{style.tex}
+
+% Tighter spacing for the 1-page variant.
+\setlist[itemize]{nosep, leftmargin=*, itemsep=0.2em}
+
+\begin{document}
+
+\input{data/header.tex}
+\input{data/experience.tex}
+\input{data/education.tex}
+\input{data/skills.tex}
+
+\end{document}
