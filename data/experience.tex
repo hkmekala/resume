@@ -3,9 +3,9 @@
 
 \subsection{\role{KeenAi Global}{Senior Associate}{May 2025 - Present}{Hybrid, Bangalore}}
 \begin{itemize}
-    \bb{Architected and shipped a \textbf{Trade Order Management System} routing flows across \textbf{23 global exchanges} (US, Europe, Singapore) and broker-dealers (\textbf{Pershing / NetX360}) over the \textbf{FIX Protocol} for institutional equity, options, and OTC structured products.}
+    \bb{Architected and shipped a \textbf{Trading Backend} routing flows across \textbf{23 global exchanges} (US, Europe, Singapore) and broker-dealers (\textbf{Pershing / NetX360}) over the \textbf{FIX Protocol} for institutional equity, options, and OTC structured products.}
     \bb{Built an end-to-end \textbf{real-time order lifecycle} pipeline --- placement, ack, partial-fill, execution report, allocation, settlement --- with idempotent state machines and exactly-once event semantics on \textbf{AWS SQS}.}
-    \bb{Designed and built the \textbf{Instrument Master Service (IMS)} on MongoDB --- the source-of-truth for \textbf{custom OTC derivative instruments} (FCNs, structured notes) --- exposing listings, quote-currency, LCM, issuer credit rating, and risk APIs.}
+    \bb{Designed and built the \textbf{Derivatives Market} data layer on MongoDB --- the source-of-truth for \textbf{custom OTC instruments} (FCNs, structured notes) --- exposing listings, quote-currency, LCM, issuer credit rating, and risk APIs.}
     \bb{Engineered a \textbf{fault-tolerant Pershing webhooks} ingestion pipeline (API Gateway + ACM + SQS FIFO + EventBridge) with at-least-once delivery, DLQ handling, and replay --- provisioned end-to-end with \textbf{Terraform}.}
     \bb{Owned the \textbf{FIX execution-report consumer} for OTC FCN trades, reconciling \textbf{back-to-back NetX360 $\leftrightarrow$ Pershing} flows and matching trade state across upstream brokers and downstream books.}
     \fb{Executed a \textbf{full-stack platform rewrite} from \textbf{Spring Boot + MySQL} to \textbf{NestJS + MongoDB} with zero downtime, unifying the runtime and dramatically improving developer velocity and query performance.}
@@ -17,7 +17,7 @@
 
 \subsection{\role{PayPal}{Software Engineer 3}{September 2024 - May 2025}{Hybrid, Bangalore}}
 \begin{itemize}
-    \bb{Owned the \textbf{OpenAI LLM Gateway} within the \textbf{PayPal Cosmos} AI/ML Platform, scaling \textbf{multi-tenant inference and training infrastructure} for AI services across PayPal's product surfaces at \textbf{\$1T+ TPV scale}.}
+    \bb{Owned the \textbf{OpenAI LLM Gateway} within the \textbf{PayPal Cosmos} AI/ML Platform, scaling \textbf{multi-tenant inference, training, and Agentic AI} infrastructure to \textbf{1M+ AI calls} across PayPal's product surfaces.}
     \bb{Built a unified \textbf{LLM Platform} integrating \textbf{Azure OpenAI}, enabling production-grade processing of audio, image, and text data for fraud detection, risk scoring, and customer support.}
     \bb{Hardened the \textbf{Data Loss Prevention (DLP)} system, strengthening data security, risk management, and regulatory compliance across PayPal's enterprise data surfaces.}
     \fb{Implemented \textbf{multi-model context management and hot-switching} across \textbf{Gemini, ChatGPT, and Claude} with request-time routing for cost / latency / quality tradeoffs.}
@@ -25,11 +25,11 @@
 
 \subsection{\role{PayPal}{Software Engineer 2}{June 2023 - August 2024}{Hybrid, Chennai}}
 \begin{itemize}
-    \fb{Led the reengineering and \textbf{AWS cloud migration} of PayPal's \textbf{Payments settlement infrastructure} from on-prem to a fault-tolerant distributed system on \textbf{DynamoDB + EKS}.}
+    \fb{Led the reengineering and \textbf{AWS cloud migration} of PayPal's \textbf{Payments settlement infrastructure} (\textbf{\$1T+ annual TPV}) from on-prem to a fault-tolerant distributed system on \textbf{DynamoDB + EKS}.}
     \fb{Built a \textbf{real-time snapshotting} solution to accelerate bank settlements, reducing end-of-day processing time and improving daily transaction throughput.}
     \fb{Spearheaded the migration of a legacy \textbf{C++ codebase to Java Spring Boot}, modernizing a critical settlement component and improving maintainability.}
     \fb{Served as \textbf{Scrum Master} for PayPal's \textbf{Payments Cloud Migration Team}, driving Agile delivery and continuous improvement throughout the on-prem-to-AWS reengineering.}
-    \mb{Led PayPal's \textbf{Payments settlement} \textbf{AWS cloud migration} from on-prem to a fault-tolerant distributed system on \textbf{DynamoDB + EKS}, and built a \textbf{real-time snapshotting} layer that accelerated bank settlements and improved daily throughput.}
+    \mb{Led PayPal's \textbf{Payments settlement} \textbf{AWS cloud migration} at \textbf{\$1T+ TPV scale} from on-prem to a fault-tolerant distributed system on \textbf{DynamoDB + EKS}, and built a \textbf{real-time snapshotting} layer that accelerated bank settlements and improved daily throughput.}
 \end{itemize}
 
 \subsection{\role{smallcase}{Software Development Engineer 1}{April 2022 - May 2023}{Remote, Bangalore}}

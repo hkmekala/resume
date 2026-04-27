@@ -12,6 +12,13 @@
 \usepackage[margin=0.6in,a4paper]{geometry}
 \setcounter{secnumdepth}{0}
 
+% Kill the default first-line indent globally. The header's tagline /
+% contact row / metric strip are rendered as separate paragraphs after
+% the name, and \parindent was pushing them right relative to the rule
+% and the section bodies underneath. With \parindent=0 everything aligns
+% flush to the left margin.
+\setlength{\parindent}{0pt}
+
 % --- Color palette
 \usepackage{xcolor}
 \definecolor{accent}{HTML}{1F3A5F}   % deep navy: senior, financial, classic
@@ -60,17 +67,19 @@
 
 % --- \role: standardised role header for use inside \subsection{...}
 %   \role{Company}{Title}{Dates}{Location}
-% Renders: <Company in navy bold> -- <Title in italic, regular weight>
-%          <Dates and Location right-aligned smallcaps muted gray>
+% All four parts in navy + bold (bold is inherited from \subsection's
+% \bfseries; we add \color{accent} and small differentiating shapes):
+%   Company  -- bold large navy
+%   Title    -- bold large italic navy
+%   Date     -- bold normalsize smallcaps navy (right-aligned)
+%   Location -- bold normalsize smallcaps navy (right-aligned, after date)
 % \texorpdfstring keeps PDF bookmarks clean (hyperref can't bookmark
-% \hfill / \scshape / \lowercase tokens, hence the "Token not allowed
-% in a PDF string" warnings without it).
+% \hfill / \scshape / \lowercase tokens cleanly).
 \newcommand{\role}[4]{%
   \texorpdfstring{%
-    \textcolor{accent}{#1}%
-    \textmd{\itshape\ \textendash\ #2}%
-    \hfill {\normalfont\color{muted}\scshape\oldstylenums{\lowercase{#3}}}%
-    \quad {\normalfont\color{muted}\scshape\oldstylenums{\lowercase{#4}}}%
+    {\color{accent}#1\ \textendash\ \itshape #2}%
+    \hfill {\normalsize\color{accent}\bfseries\scshape\oldstylenums{\lowercase{#3}}}%
+    \quad {\normalsize\color{accent}\bfseries\scshape\oldstylenums{\lowercase{#4}}}%
   }{#1 \textendash\ #2 (#3 | #4)}%
 }
 
