@@ -1,71 +1,126 @@
-% Source Sans Pro: Adobe's open-source sans-serif designed for screen + print.
-% Picked over Raleway for stronger ATS compatibility (standard T1 encoding,
-% widely available, parsed cleanly by Workday / Greenhouse / Lever / Taleo)
-% while staying clean and modern for human reviewers.
+% =====================================================================
+% Resume style — single source of truth for fonts, colors, spacing,
+% section / role / skill formatting, and variant control.
+% Designed for ATS (clean text flow, no hidden characters, no two-col)
+% AND for human reviewers (navy accent, hairline rules, hierarchy).
+% =====================================================================
+
+% --- Font: Source Sans Pro (Adobe). Strong ATS compat (T1 encoding).
 \usepackage[default,semibold,scale=0.95]{sourcesanspro}
 \usepackage[T1]{fontenc}
 
 \usepackage[margin=0.6in,a4paper]{geometry}
 \setcounter{secnumdepth}{0}
 
+% --- Color palette
+\usepackage{xcolor}
+\definecolor{accent}{HTML}{1F3A5F}   % deep navy: senior, financial, classic
+\definecolor{muted}{HTML}{4A5568}    % readable gray for dates/locations
+\definecolor{rule}{HTML}{B5C0CC}     % hairline rule under section / header
+
+% --- Lists
 \usepackage{enumitem}
-% Itemize spacing tuned for readable bullet density:
-%   topsep    -> gap before the list block (after subsection header)
-%   itemsep   -> gap between bullets (the main "breathing room" knob)
-%   leftmargin -> bullet indent (1.2em keeps text aligned, not flush-left)
+% Itemize tuned for breathable bullet density.
 \setlist[itemize]{topsep=0.3em, partopsep=0pt, parsep=0pt, leftmargin=1.2em, itemsep=0.4em}
 \setlist[enumerate]{itemsep=0pt, align=left}
-% Description list: style=unboxed + leftmargin=* makes the wrap line up flush
-% with the LABEL (not indented past it), which fixes ugly hangs on long lines
-% in the Skills section.
-\setlist[description]{style=unboxed, leftmargin=*, topsep=0.3em, itemsep=0.3em, labelsep=0.5em, font=\normalfont\bfseries}
 
+% --- Icons (FontAwesome 5). Used in the contact row.
+% Glyphs render as font glyphs; ATS parses the adjacent link text fine.
+\usepackage{fontawesome5}
+
+% --- Hyperlinks
 \usepackage{hyperref}
-\usepackage{xcolor}
-\usepackage{etoolbox}
-\usepackage{titlesec}
+\hypersetup{
+    colorlinks=true,
+    urlcolor=accent,
+    linkcolor=accent,
+}
 
-% Section / subsection spacing: clear vertical separation without wasting space.
-\titlespacing{\section}{0pt}{1.2em}{0.4em}
+% --- Conditional rendering
+\usepackage{etoolbox}
+
+% --- Section / subsection format
+\usepackage{titlesec}
+\titlespacing{\section}{0pt}{1.2em}{0.5em}
 \titlespacing{\subsection}{0pt}{0.7em}{0.15em}
 \titlespacing{\subsubsection}{0pt}{0.5em}{0.1em}
-% Section: dark gray + bold + uppercase. Strong ATS anchors that still read
-% as clean, modern typography to a human reviewer.
-\titleformat*{\section}{\color{black!70}\Large\bfseries\uppercase}
+
+% Section: navy + bold + uppercase + hairline rule below the title.
+% The rule is full \linewidth, drawn 0.5pt thick in a light navy tone.
+% NOTE: \MakeUppercase goes in before-code (not format!) so it only
+% scopes to the title text. Putting \uppercase in format leaks into
+% the after-code and uppercases color names, breaking xcolor.
+\titleformat{\section}
+  {\color{accent}\Large\bfseries}
+  {}{0em}
+  {\MakeUppercase}
+  [{\vspace{-0.55em}\textcolor{rule}{\rule{\linewidth}{0.5pt}}}]
 \titleformat*{\subsection}{\large\bfseries}
 \titleformat*{\subsubsection}{\bfseries\scshape}
 
-\newcommand{\aux}[1]{%
-  $|$ {\normalfont \textsc{#1}}%
+% --- \role: standardised role header for use inside \subsection{...}
+%   \role{Company}{Title}{Dates}{Location}
+% Renders: <Company in navy bold> -- <Title in italic, regular weight>
+%          <Dates and Location right-aligned smallcaps muted gray>
+% \texorpdfstring keeps PDF bookmarks clean (hyperref can't bookmark
+% \hfill / \scshape / \lowercase tokens, hence the "Token not allowed
+% in a PDF string" warnings without it).
+\newcommand{\role}[4]{%
+  \texorpdfstring{%
+    \textcolor{accent}{#1}%
+    \textmd{\itshape\ \textendash\ #2}%
+    \hfill {\normalfont\color{muted}\scshape\oldstylenums{\lowercase{#3}}}%
+    \quad {\normalfont\color{muted}\scshape\oldstylenums{\lowercase{#4}}}%
+  }{#1 \textendash\ #2 (#3 | #4)}%
 }
+
+% --- \rside: legacy right-aligned tag (kept for education / fallback)
 \newcommand{\rside}[1]{%
-  \hfill {\normalfont \color{black} \scshape\oldstylenums{\lowercase{#1}}}%
+  \hfill {\normalfont \color{muted} \scshape\oldstylenums{\lowercase{#1}}}%
+}
+\newcommand{\aux}[1]{$|$ {\normalfont\textsc{#1}}}
+
+% --- \skillrow: a tag-style skills line.
+%   \skillrow{Label}{item · item · item}
+% Label in navy bold uppercase, items follow on the same baseline.
+\newcommand{\skillrow}[2]{%
+  \noindent\textcolor{accent}{\bfseries\uppercase{#1}}\ \ #2\par\vspace{0.3em}%
+}
+
+% --- \metricstrip: subtle one-liner of high-signal achievements / scale.
+% \footnotesize so the full metric line fits within the text width
+% without breaking; tweak font here if you add/remove items.
+\newcommand{\metricstrip}[1]{%
+  {\footnotesize\color{accent!90}#1\par}%
 }
 
 % --- Variant control --------------------------------------------------
 % \resumevariant must be defined in the entry-point file (main_full.tex
-% or main_min.tex) BEFORE this style file is included. Falls back to
-% "full" if not set, so a stray \input{style.tex} doesn't break.
+% or main_min.tex) BEFORE this style file is included.
 \providecommand{\resumevariant}{full}
 
-% Bullet macros: emit an \item only if the current variant is in the tag set.
-%   \bb{...}  -> both variants
-%   \fb{...}  -> full variant only
-%   \mb{...}  -> min variant only
 \newcommand{\bb}[1]{\item #1}
 \newcommand{\fb}[1]{\ifdefstring{\resumevariant}{full}{\item #1}{}}
 \newcommand{\mb}[1]{\ifdefstring{\resumevariant}{min}{\item #1}{}}
-
-% Block-level conditionals for whole subsections / paragraphs / sentences.
-%   \fonly{...}  -> render only in full
-%   \monly{...}  -> render only in min
 \newcommand{\fonly}[1]{\ifdefstring{\resumevariant}{full}{#1}{}}
 \newcommand{\monly}[1]{\ifdefstring{\resumevariant}{min}{#1}{}}
 % ---------------------------------------------------------------------
 
-\hypersetup{
-    colorlinks=true,
-    urlcolor=blue,
+% --- Page footer (full variant only): name + page X of Y in muted gray.
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\fonly{%
+  \pagestyle{fancy}
+  \fancyhf{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+  \fancyfoot[C]{\small\color{muted}Harikrishna Mekala\ \ \textperiodcentered\ \ page \thepage\ of \pageref{LastPage}}
+  \fancypagestyle{plain}{%
+    \fancyhf{}%
+    \renewcommand{\headrulewidth}{0pt}%
+    \fancyfoot[C]{\small\color{muted}Harikrishna Mekala\ \ \textperiodcentered\ \ page \thepage\ of \pageref{LastPage}}%
+  }
 }
-
-\pagenumbering{gobble}
+\monly{%
+  \pagenumbering{gobble}
+}

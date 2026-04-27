@@ -1,8 +1,7 @@
 \documentclass[11pt]{article}
 
-% Variant: full -> 2-page, all roles, all bullets.
-% Must be defined BEFORE \input{style.tex} so the \bb / \fb / \mb macros
-% can resolve correctly.
+% Variant: full -> all roles, all bullets, multi-page.
+% Must be defined BEFORE \input{style.tex} so \bb / \fb / \mb resolve.
 \def\resumevariant{full}
 
 \input{style.tex}
@@ -10,8 +9,9 @@
 \begin{document}
 
 \input{data/header.tex}
+\input{data/summary.tex}
 \input{data/experience.tex}
-\input{data/education.tex}
 \input{data/skills.tex}
+\input{data/education.tex}
 
 \end{document}

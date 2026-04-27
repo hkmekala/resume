@@ -1,24 +1,22 @@
 \documentclass[11pt]{article}
 
 % Variant: min -> single-page, distilled bullets only.
-% Must be defined BEFORE \input{style.tex} so the \bb / \fb / \mb macros
-% can resolve correctly.
+% Must be defined BEFORE \input{style.tex} so \bb / \fb / \mb resolve.
 \def\resumevariant{min}
 
 \input{style.tex}
 
-% Tighter spacing for the 1-page variant. We keep modest itemsep so the
-% bullets still breathe; only topsep / titlespacing get squeezed.
+% Tighter spacing for the 1-page variant.
 \setlist[itemize]{topsep=0.2em, partopsep=0pt, parsep=0pt, leftmargin=1.2em, itemsep=0.25em}
-\setlist[description]{style=unboxed, leftmargin=*, topsep=0.2em, itemsep=0.2em, labelsep=0.5em, font=\normalfont\bfseries}
-\titlespacing*{\section}{0pt}{0.8em}{0.3em}
+\titlespacing*{\section}{0pt}{0.7em}{0.3em}
 \titlespacing*{\subsection}{0pt}{0.5em}{0.1em}
 
 \begin{document}
 
 \input{data/header.tex}
+\input{data/summary.tex}
 \input{data/experience.tex}
-\input{data/education.tex}
 \input{data/skills.tex}
+\input{data/education.tex}
 
 \end{document}
