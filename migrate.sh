@@ -1,12 +1,12 @@
 #!/bin/bash
 set -e
 
-# Step 3.1 — Create the v1-resume branch (preserves legacy state)
-git branch v1-resume
-git branch -v
+# # Step 3.1 — Create the v1-resume branch (preserves legacy state)
+# git branch v1-resume
+# git branch -v
 
-# Step 3.2 — Stay on main and remove legacy files
-git rm main.tex relavant.tex hkmekala_cv_5.pdf hkmekala_cv_6_full.pdf hkmekala_cv_6_min.pdf
+# # Step 3.2 — Stay on main and remove legacy files
+# git rm main.tex relavant.tex hkmekala_cv_5.pdf hkmekala_cv_6_full.pdf hkmekala_cv_6_min.pdf
 
 # Step 3.3 — Unzip the new state on top
 unzip -o resume-update.zip

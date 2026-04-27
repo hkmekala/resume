@@ -9,20 +9,28 @@
 \setcounter{secnumdepth}{0}
 
 \usepackage{enumitem}
-\setlist[itemize]{nosep, leftmargin=*, itemsep=0.3em}
+% Itemize spacing tuned for readable bullet density:
+%   topsep    -> gap before the list block (after subsection header)
+%   itemsep   -> gap between bullets (the main "breathing room" knob)
+%   leftmargin -> bullet indent (1.2em keeps text aligned, not flush-left)
+\setlist[itemize]{topsep=0.3em, partopsep=0pt, parsep=0pt, leftmargin=1.2em, itemsep=0.4em}
 \setlist[enumerate]{itemsep=0pt, align=left}
-\setlist[description]{itemsep=0pt}
+% Description list: style=unboxed + leftmargin=* makes the wrap line up flush
+% with the LABEL (not indented past it), which fixes ugly hangs on long lines
+% in the Skills section.
+\setlist[description]{style=unboxed, leftmargin=*, topsep=0.3em, itemsep=0.3em, labelsep=0.5em, font=\normalfont\bfseries}
 
 \usepackage{hyperref}
 \usepackage{xcolor}
 \usepackage{etoolbox}
 \usepackage{titlesec}
 
-\titlespacing{\section}{0pt}{*1}{*0}
-\titlespacing{\subsection}{0pt}{*1}{-\parskip}
-\titlespacing{\subsubsection}{1pt}{\parskip}{-\parskip}
-% Section: dark gray + bold + uppercase. Bolder than the old extra-light gray
-% style, giving clearer ATS section anchors while staying visually clean.
+% Section / subsection spacing: clear vertical separation without wasting space.
+\titlespacing{\section}{0pt}{1.2em}{0.4em}
+\titlespacing{\subsection}{0pt}{0.7em}{0.15em}
+\titlespacing{\subsubsection}{0pt}{0.5em}{0.1em}
+% Section: dark gray + bold + uppercase. Strong ATS anchors that still read
+% as clean, modern typography to a human reviewer.
 \titleformat*{\section}{\color{black!70}\Large\bfseries\uppercase}
 \titleformat*{\subsection}{\large\bfseries}
 \titleformat*{\subsubsection}{\bfseries\scshape}
